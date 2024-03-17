@@ -9,9 +9,9 @@
                         <img src="{{ asset('/uploads/product/' . $product->image) }}" class="card-img-top"
                             style="height: 200px" alt="...">
                         <div class="card-body text-center">
-                            <div class="mb-2">
+                            <h5 class="mb-2 fw-bold">
                                 {{ $product->name }}
-                            </div>
+                            </h5>
                             <div class="text-decoration-line-through">
                                 {{ number_format($product->price) }} VND
                             </div>
