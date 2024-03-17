@@ -4,6 +4,7 @@ use App\Http\Controllers\AdController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController as WebHomeController;
 use App\Http\Controllers\ProductController;
@@ -24,8 +25,22 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [WebHomeController::class, 'index'])->name('home');
+// User page
+Route::group([], function () {
+    // Home
+    Route::get('/', [WebHomeController::class, 'index'])->name('home');
 
+    // Add to cart
+    Route::post('/add-to-cart/{product}', [CartController::class, 'addToCart'])->name('addToCart');
+
+    // Product with category
+    Route::get('/category/{id}', [WebHomeController::class, 'productWithCategory'])->name('productCategory');
+
+    // Product detail
+    Route::get('/product-detail/{id}', [WebHomeController::class, 'productDetail'])->name('product-detail');
+});
+
+// Admin page
 Route::group([], function () {
     Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
     Route::post('/admin/login', [LoginController::class, 'login'])->name('admin.login.post');
