@@ -12,7 +12,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::select()->where('is_admin', 0)->get();
+        $users = User::all();
         return view('admin.user.index', compact('users'));
     }
 
@@ -32,9 +32,13 @@ class UserController extends Controller
         User::insert([
             'name' => $request->name,
             'email' => $request->email,
-            'is_admin' => 0,
             'password' => bcrypt($request->password),
             'phone' => $request->phone,
+            'gender' => $request->gender,
+            'date' => $request->date,
+            'district' => $request->district,
+            'ward' => $request->ward,
+            'province' => $request->province,
             'address' => $request->address,
             'created_at' => now(),
             'updated_at' => now()
@@ -71,8 +75,12 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->phone = $request->phone;
+        $user->gender = $request->gender;
+        $user->date = $request->date;
+        $user->district = $request->district;
+        $user->ward = $request->ward;
+        $user->province = $request->province;
         $user->address = $request->address;
-        $user->is_admin = 0;
 
         $user->update();
 

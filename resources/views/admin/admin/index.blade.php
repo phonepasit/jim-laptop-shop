@@ -39,9 +39,10 @@
                     <thead>
                         <tr>
                             <th style="width: 50px">ID</th>
-                            <th>Tên</th>
+                            <th>Name</th>
                             <th>Email</th>
-                            <th>Số điện thoại</th>
+                            <th>Phone</th>
+                            <th>Address</th>
                             <th style="width: 100px">Action</th>
                         </tr>
                     </thead>
@@ -52,6 +53,7 @@
                                 <td>{{ $admin->name }}</td>
                                 <td>{{ $admin->email }}</td>
                                 <td>{{ $admin->phone }}</td>
+                                <td>{{ $admin->address }}</td>
                                 <td>
                                     <a href="{{ route('admin.admin.edit', ['id' => $admin->id]) }}" class="me-3">
                                         <i class="bi bi-person-exclamation text-black"></i>

@@ -31,10 +31,10 @@
         <div class="card-product-image-index row bg-white" style="border-radius: 1rem">
             <div class="table-header d-flex justify-content-between py-3">
                 <a href="{{ route('admin.product.index') }}"
-                    class="btn-new-product-image btn btn-sm mb-0" type="button">Trở lại
+                    class="btn-new-product-image btn btn-light btn-sm mb-0" type="button">Back
                 </a>
                 <a href="{{ route('admin.product-image.create', ['id' => $id]) }}"
-                    class="btn-new-product-image btn bg-black btn-sm mb-0 text-white" type="button">+&nbsp; New Image product
+                    class="btn-new-product-image btn bg-black btn-sm mb-0 text-white" type="button">+&nbsp; New Image Product
                 </a>
             </div>
             <div class="p-0">
@@ -42,7 +42,7 @@
                     <thead>
                         <tr>
                             <th style="width: 50px">ID</th>
-                            <th>Ảnh</th>
+                            <th>Image</th>
                             <th>Action</th>
                         </tr>
                     </thead>

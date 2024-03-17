@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Banner;
+use App\Models\Ad;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
 
-class BannerController extends Controller
+class AdController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,9 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $banner = Banner::all();
-        // dd($banner);
-        return view('admin.banner.index', compact('banner'));
+        $ad = Ad::all();
+        // dd($ad);
+        return view('admin.ad.index', compact('ad'));
     }
 
     /**
@@ -29,7 +29,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        return view('admin.banner.create');
+        return view('admin.ad.create');
     }
 
     /**
@@ -40,23 +40,23 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        $banner = $this->IsVaidSort($request);
-        if ($banner == true) {
-            $banner = new Banner;
-            $banner->name = $request->input('name');
-            $banner->description = $request->input('description');
-            $banner->url = $request->input('url');
-            $banner->active = $request->input('active');
-            $banner->sort_by = $request->input('sort_by');
+        $ad = $this->IsVaidSort($request);
+        if ($ad == true) {
+            $ad = new Ad;
+            $ad->name = $request->input('name');
+            $ad->description = $request->input('description');
+            $ad->url = $request->input('url');
+            $ad->active = $request->input('active');
+            $ad->sort_by = $request->input('sort_by');
             if ($request->hasfile('image')) {
                 $file = $request->file('image');
                 $extention = $file->getClientOriginalExtension();
                 $filename = time() . '.' . $extention;
-                $file->move('uploads/Banner/', $filename);
-                $banner->image = $filename;
+                $file->move('uploads/Ad/', $filename);
+                $ad->image = $filename;
             }
-            $banner->save();
-            return redirect('admin/banner')->with('status', 'banner Image Added Successfully');
+            $ad->save();
+            return redirect('admin/ad')->with('status', 'Ad Image Added Successfully');
         }
         Session::flash('error', 'Vui lòng đúng số thứ tự');
         return redirect()->back();
@@ -81,8 +81,8 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
-        $banner = Banner::find($id);
-        return view('admin.banner.edit', compact('banner'));
+        $ad = Ad::find($id);
+        return view('admin.ad.edit', compact('ad'));
     }
 
     /**
@@ -94,23 +94,23 @@ class BannerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $banner = $this->IsVaidSort_update($request, $id);
-        if ($banner == true) {
-            $banner = Banner::find($id);
-            $banner->name = $request->input('name');
-            $banner->description = $request->input('description');
-            $banner->url = $request->input('url');
-            $banner->active = $request->input('active');
-            $banner->sort_by = $request->input('sort_by');
+        $ad = $this->IsVaidSort_update($request, $id);
+        if ($ad == true) {
+            $ad = Ad::find($id);
+            $ad->name = $request->input('name');
+            $ad->description = $request->input('description');
+            $ad->url = $request->input('url');
+            $ad->active = $request->input('active');
+            $ad->sort_by = $request->input('sort_by');
             if ($request->hasfile('image')) {
                 $file = $request->file('image');
                 $extention = $file->getClientOriginalExtension();
                 $filename = time() . '.' . $extention;
-                $file->move('uploads/Banner/', $filename);
-                $banner->image = $filename;
+                $file->move('uploads/Ad/', $filename);
+                $ad->image = $filename;
             }
-            $banner->save();
-            return redirect('admin/banner')->with('status', 'banner Image Added Successfully');
+            $ad->save();
+            return redirect('admin/ad')->with('status', 'Ad Image Added Successfully');
         }
         Session::flash('error', 'Vui lòng đúng số thứ tự');
         return redirect()->back();
@@ -124,19 +124,19 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
-        $banner = Banner::find($id);
-        $destination = 'uploads/Banner/' . $banner->image;
+        $ad = Ad::find($id);
+        $destination = 'uploads/Ad/' . $ad->image;
         if (File::exists($destination)) {
             File::delete($destination);
         }
-        $banner->delete();
-        return redirect()->back()->with('status', 'banner Image Deleted Successfully');
+        $ad->delete();
+        return redirect()->back()->with('status', 'Ad Image Deleted Successfully');
     }
     protected function IsVaidSort(Request $request)
     {
         $sort = $request->input('sort_by');
-        $count_banner = Banner::select()->where('sort_by', $sort)->count('sort_by');
-        if ($count_banner > 0 || $sort <= 0) {
+        $count_ad = Ad::select()->where('sort_by', $sort)->count('sort_by');
+        if ($count_ad > 0 || $sort <= 0) {
             return false;
         }
         return true;
@@ -145,8 +145,8 @@ class BannerController extends Controller
     {
         $sort = $request->input('sort_by');
 
-        $count_banner = Banner::select()->where('sort_by', $sort)->where('id', '<>', $id)->count('sort_by');
-        if ($count_banner > 0 || $sort <= 0) {
+        $count_ad = Ad::select()->where('sort_by', $sort)->where('id', '<>', $id)->count('sort_by');
+        if ($count_ad > 0 || $sort <= 0) {
             return false;
         }
         return true;

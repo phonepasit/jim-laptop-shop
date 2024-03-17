@@ -13,11 +13,26 @@ class Product extends Model
     protected $tatble = 'products';
 
     protected $fillable = [
+        'category_id',
         'name',
         'description',
+        'image',
         'price',
         'price_sale',
-        'category_id',
-        'active'
-    ];
+        'active'];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
 }

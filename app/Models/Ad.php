@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Banner extends Model
+class Ad extends Model
 {
     use HasFactory;
 
-    protected $table = 'banners';
+    protected $table = 'ads';
 
     protected $fillable = [
         'name',

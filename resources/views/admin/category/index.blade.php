@@ -30,8 +30,8 @@
     @php
 
         $active = [
-            1 => 'Hoạt động',
-            0 => 'Không hoạt động',
+            0 => 'No Active',
+            1 => 'Active',
         ];
 
     @endphp
@@ -48,8 +48,8 @@
                     <thead>
                         <tr>
                             <th style="width: 50px">ID</th>
-                            <th>Tên</th>
-                            <th>Trạng Thái</th>
+                            <th>Name</th>
+                            <th>Status</th>
                             <th style="width: 100">Action</th>
                         </tr>
                     </thead>

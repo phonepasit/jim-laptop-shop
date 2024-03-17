@@ -18,9 +18,9 @@
                     @csrf
 
                     <div class="mb-3 row justify-content-center">
-                        <label for="image[]" class="col-sm-2 col-form-label">Hình ảnh:</label>
+                        <label for="image[]" class="col-sm-2 col-form-label">Image:</label>
                         <div class="col-sm-6">
-                            <input type="file" name="image[]" class="form-control" placeholder="Nhập hình ảnh..." multiple>
+                            <input type="file" name="image[]" class="form-control" multiple>
                             @if ($errors->has('image[]'))
                                 <span class="help-block text-danger">{{ $errors->first('image[]') }}</span>
                             @endif
@@ -29,11 +29,11 @@
 
                     <div class="mb-3 mt-5 row d-flex">
                         <div class="col-sm offset-sm-2">
-                            <a href="{{ route('admin.product-image.index', ['id' => $id]) }}" class="btn border">Trở lại</a>
+                            <a href="{{ route('admin.product-image.index', ['id' => $id]) }}" class="btn btn-light border">Back</a>
                         </div>
 
                         <div class="col-sm offset-sm-2">
-                            <button type="submit" class="btn btn-dark text-white">Thêm Image Product</button>
+                            <button type="submit" class="btn btn-dark text-white">Add Image Product</button>
                         </div>
                     </div>
                 </form>

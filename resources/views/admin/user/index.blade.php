@@ -27,6 +27,13 @@
         }
     </style>
 
+    @php
+        $gender = [
+            0 => 'Female',
+            1 => 'Male'
+        ]
+    @endphp
+
     <div class="container py-4">
         <div class="card-user-index row bg-white" style="border-radius: 1rem">
             <div class="table-header d-flex justify-content-between py-3">
@@ -39,10 +46,15 @@
                     <thead>
                         <tr>
                             <th style="width: 50px">ID</th>
-                            <th>Tên</th>
+                            <th>Name</th>
                             <th>Email</th>
-                            <th>Số điện thoại</th>
-                            <th>Địa chỉ</th>
+                            <th>Phone</th>
+                            <th>Gender</th>
+                            <th>Date Of Birth</th>
+                            <th>District</th>
+                            <th>Ward</th>
+                            <th>Province</th>
+                            <th>Address</th>
                             <th style="width: 100px">Action</th>
                         </tr>
                     </thead>
@@ -53,6 +65,11 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone }}</td>
+                                <td>{{ $gender[$user->gender] }}</td>
+                                <td>{{ $user->date }}</td>
+                                <td>{{ $user->district }}</td>
+                                <td>{{ $user->ward }}</td>
+                                <td>{{ $user->province }}</td>
                                 <td>{{ $user->address }}</td>
                                 <td>
                                     <a href="{{ route('admin.user.edit', ['id' => $user->id]) }}" class="me-3">

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -12,7 +12,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = User::select()->where('is_admin', 1)->get();
+        $admins = Admin::all();
         return view('admin.admin.index', compact('admins'));
     }
 
@@ -29,12 +29,12 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        User::insert([
+        Admin::insert([
             'name' => $request->name,
             'email' => $request->email,
-            'is_admin' => 1,
             'password' => bcrypt($request->password),
             'phone' => $request->phone,
+            'address' => $request->address,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -55,7 +55,7 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $admin = User::find($id);
+        $admin = Admin::find($id);
 
         return view('admin.admin.edit', compact('admin'));
     }
@@ -65,11 +65,11 @@ class AdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $admin = User::find($id);
+        $admin = Admin::find($id);
         $admin->name = $request->name;
         $admin->email = $request->email;
         $admin->password = bcrypt($request->password);
-        $admin->is_admin = 1;
+        $admin->address = $request->address;
         $admin->phone = $request->phone;
 
         $admin->update();
@@ -82,7 +82,7 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        $admin = User::find($id);
+        $admin = Admin::find($id);
         $admin->delete();
 
         return redirect()->route('admin.admin.index');

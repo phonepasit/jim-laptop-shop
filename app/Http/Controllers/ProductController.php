@@ -43,12 +43,9 @@ class ProductController extends Controller
         $product = $this->isvaildPrice($request);
         if ($product != false) {
             $product = new product;
+            $product->category_id = $request->input('category_id');
             $product->name = $request->input('name');
             $product->description = $request->input('description');
-            $product->price = $request->input('price');
-            $product->price_sale = $request->input('price_sale');
-            $product->category_id = $request->input('category_id');
-            $product->active = $request->input('active');
             if ($request->hasfile('image')) {
                 $file = $request->file('image');
                 $extention = $file->getClientOriginalExtension();
@@ -56,10 +53,13 @@ class ProductController extends Controller
                 $file->move('uploads/Product/', $filename);
                 $product->image = $filename;
             }
+            $product->price = $request->input('price');
+            $product->price_sale = $request->input('price_sale');
+            $product->active = $request->input('active');
             $product->save();
             return redirect('admin/product')->with('status', 'product Image Added Successfully');
         }
-        Session::flash('error', 'Vui lòng nhập giá Sale bé hơn giá gốc');
+        Session::flash('error', 'Please enter a Sale price that is less than the original price');
         return redirect()->back();
     }
 
@@ -99,12 +99,9 @@ class ProductController extends Controller
         $product = $this->isvaildPrice($request);
         if ($product != false) {
             $product = product::find($id);
+            $product->category_id = $request->input('category_id');
             $product->name = $request->input('name');
             $product->description = $request->input('description');
-            $product->price = $request->input('price');
-            $product->price_sale = $request->input('price_sale');
-            $product->category_id = $request->input('category_id');
-            $product->active = $request->input('active');
             if ($request->hasfile('image')) {
                 $file = $request->file('image');
                 $extention = $file->getClientOriginalExtension();
@@ -112,11 +109,13 @@ class ProductController extends Controller
                 $file->move('uploads/Product/', $filename);
                 $product->image = $filename;
             }
-
+            $product->price = $request->input('price');
+            $product->price_sale = $request->input('price_sale');
+            $product->active = $request->input('active');
             $product->save();
             return redirect('admin/product');
         } else {
-            Session::flash('error', 'Vui lòng nhập giá Sale thấp hơn giá gốc');
+            Session::flash('error', 'Please enter a Sale price that is less than the original price');
             return redirect()->back();
         }
     }

@@ -104,8 +104,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ str_contains(url()->current(), 'admin/banner') ? 'active' : '' }}"
-                        href="{{ route('admin.banner.index') }}"><i class="bi bi-badge-ad me-2"></i>Banners</a>
+                    <a class="nav-link {{ Request::is('admin/ad*') && !Request::is('admin/admin*') ? 'active' : '' }}"
+                        href="{{ route('admin.ad.index') }}">
+                        <i class="bi bi-badge-ad me-2"></i>
+                        Ads
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ str_contains(url()->current(), 'admin/category') ? 'active' : '' }}"

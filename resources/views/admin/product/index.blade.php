@@ -29,8 +29,8 @@
     @php
 
         $active = [
-            0 => 'Không hoạt động',
-            1 => 'Hoạt động',
+            0 => 'No Active',
+            1 => 'Active',
         ];
 
     @endphp
@@ -47,12 +47,12 @@
                     <thead>
                         <tr>
                             <th style="width: 50px">ID</th>
-                            <th>Tiêu Đề</th>
-                            <th>Ảnh</th>
-                            <th>Giá tiền</th>
-                            <th>Giá tiền đã giảm</th>
-                            <th>Trang Thái</th>
-                            <th>Chi tiết ảnh</th>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Price</th>
+                            <th>Price Sale</th>
+                            <th>Status</th>
+                            <th>Image Detail</th>
                             <th style="width: 100px">Action</th>
                         </tr>
                     </thead>

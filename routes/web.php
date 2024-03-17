@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController as WebHomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\UserController;
@@ -21,10 +22,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes();
 
+Route::get('/', [WebHomeController::class, 'index'])->name('home');
 
 Route::group([], function () {
     Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
@@ -32,7 +32,7 @@ Route::group([], function () {
     Route::post('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
 });
 
-Route::prefix('admin')->middleware(['auth'])->group(function () {
+Route::prefix('admin')->middleware(['auth:admin'])->group(function () {
     // dashboard
     Route::get('/', [HomeController::class, 'index'])->name('admin.home');
 
@@ -52,13 +52,13 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::put('admin/{id}', [AdminController::class, 'update'])->name('admin.admin.update');
     Route::delete('admin/{id}', [AdminController::class, 'destroy'])->name('admin.admin.delete');
 
-    // banner
-    Route::get('banner', [BannerController::class, 'index'])->name('admin.banner.index');
-    Route::get('banner/create', [BannerController::class, 'create'])->name('admin.banner.create');
-    Route::post('banner', [BannerController::class, 'store'])->name('admin.banner.store');
-    Route::get('banner/{id}/edit', [BannerController::class, 'edit'])->name('admin.banner.edit');
-    Route::put('banner/{id}', [BannerController::class, 'update'])->name('admin.banner.update');
-    Route::delete('banner/{id}', [BannerController::class, 'destroy'])->name('admin.banner.delete');
+    // ad
+    Route::get('ad', [AdController::class, 'index'])->name('admin.ad.index');
+    Route::get('ad/create', [AdController::class, 'create'])->name('admin.ad.create');
+    Route::post('ad', [AdController::class, 'store'])->name('admin.ad.store');
+    Route::get('ad/{id}/edit', [AdController::class, 'edit'])->name('admin.ad.edit');
+    Route::put('ad/{id}', [AdController::class, 'update'])->name('admin.ad.update');
+    Route::delete('ad/{id}', [AdController::class, 'destroy'])->name('admin.ad.delete');
 
     // category
     Route::get('category', [CategoryController::class, 'index'])->name('admin.category.index');

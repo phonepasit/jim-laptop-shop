@@ -31,8 +31,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $admin = count(User::select()->where('is_admin', 1)->get());
-        $user = count(User::select()->where('is_admin', 0)->get());
+        $admin = count(User::select()->get());
+        $user = count(User::select()->get());
         $product = count(Product::all());
         return view('admin.home', [
             'admin' => $admin,

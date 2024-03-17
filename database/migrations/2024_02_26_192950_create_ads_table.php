@@ -11,26 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('ads', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('category_id')->unsigned();
             $table->string('name');
-            $table->text('description');
             $table->string('image');
-            $table->double('price');
-            $table->double('price_sale');
+            $table->string('description');
+            $table->string('url');
             $table->integer('active');
+            $table->integer('sort_by');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('ads');
     }
 };
