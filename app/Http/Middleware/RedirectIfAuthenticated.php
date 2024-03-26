@@ -18,14 +18,17 @@ class RedirectIfAuthenticated
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
         $guards = empty($guards) ? [null] : $guards;
-
+        if($guards[0] === null) {
+            return $next($request);
+        }
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-
-            dd($request->all(), $guard);
                 if ($guard === 'admin') {
                     return redirect()->route('admin.home');
+                }
+                if ($guard === 'web') {
+                    return redirect()->route('home');
                 }
                 return redirect()->route('home');
             }

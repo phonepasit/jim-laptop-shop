@@ -29,15 +29,28 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $admin = count(User::select()->get());
-        $user = count(User::select()->get());
-        $product = count(Product::all());
-        return view('admin.home', [
-            'admin' => $admin,
-            'user' => $user,
-            'product' => $product,
-        ]);
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        $adminQuery = Admin::query();
+        $userQuery = User::query();
+        $productQuery = Product::query();
+        $orderQuery = Order::query();
+
+        if ($start_date && $end_date) {
+            $adminQuery->whereBetween('created_at', [$start_date, $end_date]);
+            $userQuery->whereBetween('created_at', [$start_date, $end_date]);
+            $productQuery->whereBetween('created_at', [$start_date, $end_date]);
+            $orderQuery->whereBetween('created_at', [$start_date, $end_date]);
+        }
+
+        $admin = $adminQuery->count();
+        $user = $userQuery->count();
+        $product = $productQuery->count();
+        $order = $orderQuery->count();
+
+        return view('admin.home', compact('admin', 'user', 'product', 'order'));
     }
 }

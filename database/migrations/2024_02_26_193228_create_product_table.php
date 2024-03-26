@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('image');
             $table->double('price');
             $table->double('price_sale');
+            $table->integer('quantity');
             $table->integer('active');
             $table->timestamps();
             $table->softDeletes();

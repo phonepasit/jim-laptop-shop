@@ -1,8 +1,15 @@
+<style>
+    .description {
+        word-wrap: break-word;
+        height: 390px
+    }
+</style>
+
 <div class="container-fuild mb-3">
     <a href="/">Go back</a>
 </div>
 
-<form action="{{ route('addToCart', ['product' => $product->id]) }}" method="post">
+<form action="{{ route('addToCart', ['id' => $product->id]) }}" method="post">
     @csrf
     <div class="d-flex" style="width: 100%">
         <div class="d-flex flex-column">
@@ -33,7 +40,7 @@
                     Price Sale: {{ number_format($product->price_sale) }} VND
                 </p>
             </div>
-            <div class="mt-3">
+            <div class="mt-3 description overflow-auto">
                 {{ $product->description }}
             </div>
             <button type="submit" class="btn btn-secondary mt-3 w-100">Add to Cart</button>

@@ -1,14 +1,14 @@
 <div>
-    <form action="" method="GET">
+    <form action="{{ route('search') }}" method="GET">
         <div class="input-group mb-3" style="width: 100%;">
             <select class="form-select bg-dark text-white p-2" name="category" style="width: 25%;">
-                <option selected>Select Category</option>
+                <option value="" selected>Select Category</option>
                 <!-- Add options for each category -->
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <option  value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
             </select>
-            <input type="text" class="form-control" placeholder="Search" name="query" style="width: 55%;">
+            <input type="text" class="form-control" placeholder="Search" name="query_search" style="width: 55%;">
             <button class="btn btn-outline-secondary bg-dark text-white" type="submit" style="width: 10%;">Search</button>
         </div>
     </form>

@@ -36,7 +36,7 @@
         </header>
 
         @switch(true)
-            @case(request()->is('/'))
+            @case(request()->is('/') || request()->is('search*'))
                 {{-- Category & Slide --}}
                 <div class="container mt-4">
                     <div class="row">
@@ -86,6 +86,38 @@
 
                 @break
 
+            @case(request()->is('cart*'))
+                {{-- Main --}}
+                <main class="container my-4">
+                    @include('web.cart')
+                </main>
+
+                @break
+
+            @case(request()->is('login*'))
+                {{-- Main --}}
+                <main class="container my-4">
+                    @include('web.auth.login')
+                </main>
+
+                @break
+
+            @case(request()->is('register*'))
+                {{-- Main --}}
+                <main class="container my-4">
+                    @include('web.auth.register')
+                </main>
+
+                @break
+
+            @case(request()->is('edit-user*'))
+                {{-- Main --}}
+                <main class="container my-4">
+                    @include('web.editUser')
+                </main>
+
+                @break
+
         @endswitch
 
         {{-- Footer --}}
@@ -94,6 +126,20 @@
         </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            @if (session('success'))
+                toastr.success("{{ session('success') }}");
+            @endif
+
+            @if (session('error'))
+                toastr.error("{{ session('error') }}");
+            @endif
+        });
+    </script>
 </body>
 
 </html>

@@ -4,9 +4,13 @@ use App\Http\Controllers\AdController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\LoginController as AuthLoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController as WebHomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\UserController;
@@ -27,18 +31,43 @@ Auth::routes();
 
 // User page
 Route::group([], function () {
+    Route::get('/login', [AuthLoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login-post', [AuthLoginController::class, 'login'])->name('login.post');
+    Route::post('/logout', [AuthLoginController::class, 'logout'])->name('logout');
+
+    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.post');
+});
+
+Route::group([], function () {
     // Home
     Route::get('/', [WebHomeController::class, 'index'])->name('home');
 
     // Add to cart
-    Route::post('/add-to-cart/{product}', [CartController::class, 'addToCart'])->name('addToCart');
+    Route::post('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('addToCart');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart');
+    Route::post('/updateCart/{id}', [CartController::class, 'update'])->name('update.cart');
+    Route::delete('/deleteProductCart/{id}', [CartController::class, 'delete'])->name('delete.cart');
 
     // Product with category
     Route::get('/category/{id}', [WebHomeController::class, 'productWithCategory'])->name('productCategory');
 
     // Product detail
     Route::get('/product-detail/{id}', [WebHomeController::class, 'productDetail'])->name('product-detail');
+
+    // Search
+    Route::get('/search-product', [WebHomeController::class, 'search'])->name('search');
+
+    // User information
+    Route::get('/edit-user', [RegisterController::class, 'edit'])->name('edit-user');
+    Route::put('/update-user/{id}', [RegisterController::class, 'update'])->name('edit-user-update');
+
+    // Checkout
+    Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 });
+
+
+
 
 // Admin page
 Route::group([], function () {
@@ -96,4 +125,9 @@ Route::prefix('admin')->middleware(['auth:admin'])->group(function () {
     Route::get('product-image/{id}/create', [ProductImageController::class, 'create'])->name('admin.product-image.create');
     Route::post('product-image/{id}', [ProductImageController::class, 'store'])->name('admin.product-image.store');
     Route::delete('product-image/{id}', [ProductImageController::class, 'destroy'])->name('admin.product-image.delete');
+
+    // order
+    Route::get('order', [OrderController::class, 'index'])->name('admin.order.index');
+    Route::get('order-detail/{id}', [OrderController::class, 'edit'])->name('admin.order.edit');
+    Route::put('order/{id}', [OrderController::class, 'update'])->name('admin.order.update');
 });

@@ -16,6 +16,6 @@ class Authenticate extends Middleware
             return route('admin.login');
         }
 
-        return redirect()->route('/');
+        return redirect()->route('home');
     }
 }
