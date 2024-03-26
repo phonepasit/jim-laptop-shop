@@ -51,6 +51,7 @@
                             <th>Image</th>
                             <th>Price</th>
                             <th>Price Sale</th>
+                            <th>Quantity</th>
                             <th>Status</th>
                             <th>Image Detail</th>
                             <th style="width: 100px">Action</th>
@@ -64,8 +65,9 @@
                                 <td>
                                     <img src="{{ asset('/uploads/product/' . $product->image) }}" height="40px">
                                 </td>
-                                <td>{{ number_format($product->price) }} </td>
-                                <td>{{ number_format($product->price_sale) }} </td>
+                                <td>{{ number_format($product->price) }} VND</td>
+                                <td>{{ number_format($product->price_sale) }} VND</td>
+                                <td>{{ $product->quantity }}</td>
                                 <td>{{ $active[$product->active] }}</td>
 
                                 <td>

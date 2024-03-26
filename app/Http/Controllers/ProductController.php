@@ -55,6 +55,7 @@ class ProductController extends Controller
             }
             $product->price = $request->input('price');
             $product->price_sale = $request->input('price_sale');
+            $product->quantity = $request->input('quantity');
             $product->active = $request->input('active');
             $product->save();
             return redirect('admin/product')->with('status', 'product Image Added Successfully');
@@ -111,6 +112,7 @@ class ProductController extends Controller
             }
             $product->price = $request->input('price');
             $product->price_sale = $request->input('price_sale');
+            $product->quantity = $request->input('quantity');
             $product->active = $request->input('active');
             $product->save();
             return redirect('admin/product');

@@ -82,6 +82,17 @@
                     </div>
 
                     <div class="mb-3 row justify-content-center">
+                        <label for="quantity" class="col-sm-2 col-form-label">Quantity:</label>
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" id="quantity" name="quantity"
+                                placeholder="Please Enter Quantity...">
+                            @if ($errors->has('quantity'))
+                                <span class="help-block text-danger">{{ $errors->first('quantity') }}</span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row justify-content-center">
                         <label class="col-sm-2 col-form-label">Active:</label>
                         <div class="col-sm-6">
                             <div class="custom-control custom-radio">
