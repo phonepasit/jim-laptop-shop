@@ -18,7 +18,6 @@ class AdController extends Controller
     public function index()
     {
         $ad = Ad::all();
-        // dd($ad);
         return view('admin.ad.index', compact('ad'));
     }
 
@@ -40,26 +39,20 @@ class AdController extends Controller
      */
     public function store(Request $request)
     {
-        $ad = $this->IsVaidSort($request);
-        if ($ad == true) {
-            $ad = new Ad;
-            $ad->name = $request->input('name');
-            $ad->description = $request->input('description');
-            $ad->url = $request->input('url');
-            $ad->active = $request->input('active');
-            $ad->sort_by = $request->input('sort_by');
-            if ($request->hasfile('image')) {
-                $file = $request->file('image');
-                $extention = $file->getClientOriginalExtension();
-                $filename = time() . '.' . $extention;
-                $file->move('uploads/Ad/', $filename);
-                $ad->image = $filename;
-            }
-            $ad->save();
-            return redirect('admin/ad')->with('status', 'Ad Image Added Successfully');
+        $ad = new Ad;
+        $ad->name = $request->input('name');
+        $ad->description = $request->input('description');
+        $ad->url = $request->input('url');
+        $ad->active = $request->input('active');
+        if ($request->hasfile('image')) {
+            $file = $request->file('image');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('uploads/Ad/', $filename);
+            $ad->image = $filename;
         }
-        Session::flash('error', 'Vui lòng đúng số thứ tự');
-        return redirect()->back();
+        $ad->save();
+        return redirect('admin/ad')->with('status', 'Ad Image Added Successfully');
     }
 
     /**
@@ -94,26 +87,20 @@ class AdController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $ad = $this->IsVaidSort_update($request, $id);
-        if ($ad == true) {
-            $ad = Ad::find($id);
-            $ad->name = $request->input('name');
-            $ad->description = $request->input('description');
-            $ad->url = $request->input('url');
-            $ad->active = $request->input('active');
-            $ad->sort_by = $request->input('sort_by');
-            if ($request->hasfile('image')) {
-                $file = $request->file('image');
-                $extention = $file->getClientOriginalExtension();
-                $filename = time() . '.' . $extention;
-                $file->move('uploads/Ad/', $filename);
-                $ad->image = $filename;
-            }
-            $ad->save();
-            return redirect('admin/ad')->with('status', 'Ad Image Added Successfully');
+        $ad = Ad::find($id);
+        $ad->name = $request->input('name');
+        $ad->description = $request->input('description');
+        $ad->url = $request->input('url');
+        $ad->active = $request->input('active');
+        if ($request->hasfile('image')) {
+            $file = $request->file('image');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('uploads/Ad/', $filename);
+            $ad->image = $filename;
         }
-        Session::flash('error', 'Vui lòng đúng số thứ tự');
-        return redirect()->back();
+        $ad->save();
+        return redirect('admin/ad')->with('status', 'Ad Image Added Successfully');
     }
 
     /**
@@ -131,24 +118,5 @@ class AdController extends Controller
         }
         $ad->delete();
         return redirect()->back()->with('status', 'Ad Image Deleted Successfully');
-    }
-    protected function IsVaidSort(Request $request)
-    {
-        $sort = $request->input('sort_by');
-        $count_ad = Ad::select()->where('sort_by', $sort)->count('sort_by');
-        if ($count_ad > 0 || $sort <= 0) {
-            return false;
-        }
-        return true;
-    }
-    protected function IsVaidSort_update(Request $request, $id)
-    {
-        $sort = $request->input('sort_by');
-
-        $count_ad = Ad::select()->where('sort_by', $sort)->where('id', '<>', $id)->count('sort_by');
-        if ($count_ad > 0 || $sort <= 0) {
-            return false;
-        }
-        return true;
     }
 }

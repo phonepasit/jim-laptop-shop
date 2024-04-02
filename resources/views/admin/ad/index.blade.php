@@ -51,7 +51,6 @@
                             <th>Name</th>
                             <th>Link</th>
                             <th>Image</th>
-                            <th>Sort By</th>
                             <th>Status</th>
                             <th style="width: 100px">Action</th>
                         </tr>
@@ -66,7 +65,6 @@
                                     <img src="{{ asset('uploads/Ad/' . $ad->image) }}" height="40px">
 
                                 </td>
-                                <td>{{ $ad->sort_by }}</td>
                                 <td>{{ $active[$ad->active] }}</td>
 
                                 <td>

@@ -7,9 +7,9 @@
                 <a href=" {{ route('product-detail', ['id' => $product->id]) }}" class="text-decoration-none">
                     <div class="card mb-4 border-0" style="box-shadow: 0px 15px 59px -14px rgba(0,0,0,0.94);">
                         <img src="{{ asset('/uploads/product/' . $product->image) }}" class="card-img-top"
-                            style="height: 200px" alt="...">
+                            style="height: 200px; padding: 15px 15px;" alt="...">
                         <div class="card-body text-center">
-                            <h5 class="mb-2 fw-bold">
+                            <h5 class="mb-2 fw-bold w-100 text-truncate">
                                 {{ $product->name }}
                             </h5>
                             <div class="text-decoration-line-through">

@@ -58,17 +58,6 @@
                     </div>
 
                     <div class="mb-3 row justify-content-center">
-                        <label for="menu" class="col-sm-2 col-form-label">Sort By:</label>
-                        <div class="col-sm-6">
-                            <input type="number" name="sort_by" value="1" class="form-control"
-                                placeholder="Please Enter Sort By...">
-                            @if ($errors->has('sort_by'))
-                                <span class="help-block text-danger">{{ $errors->first('sort_by') }}</span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row justify-content-center">
                         <label class="col-sm-2 col-form-label">Active:</label>
                         <div class="col-sm-6">
                             <div class="custom-control custom-radio">

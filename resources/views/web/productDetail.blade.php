@@ -6,7 +6,7 @@
 </style>
 
 <div class="container-fuild mb-3">
-    <a href="/">Go back</a>
+    <button class="btn btn-danger"><a href="/" class="text-white text-decoration-none">Go Back</a></button>
 </div>
 
 <form action="{{ route('addToCart', ['id' => $product->id]) }}" method="post">
@@ -16,7 +16,7 @@
             @foreach ($product->productImages as $productDetail)
                 <div class="mb-2">
                     <img src="{{ asset('/uploads/product_image/' . $productDetail->image) }}"
-                        style="width: 75px; height: 75px">
+                        style="width: 75px; height: 75px; border-radius: 5px; padding: 7px" class="shadow">
                 </div>
             @endforeach
         </div>
@@ -32,7 +32,7 @@
             <div class="mt-2 d-flex">
                 Price:&nbsp;
                 <p class="text-decoration-line-through mb-0">
-                    {{ number_format($product->price_sale) }} VND
+                    {{ number_format($product->price) }} VND
                 </p>
             </div>
             <div>

@@ -9,10 +9,10 @@
 <table class="table">
     <thead class="table-dark">
         <tr>
-            <th class="px-5 py-2 text-center">Name</th>
+            <th class="px-5 py-2 text-center" style="width: 250px;">Name</th>
             <th class="px-5 py-2 text-center">Image</th>
-            <th class="px-5 py-2 text-center">Price</th>
-            <th class="px-5 py-2 text-center">Quantity</th>
+            <th class="px-5 py-2 text-center" style="width: 230px;">Price</th>
+            <th class="px-5 py-2 text-center" style="width: 250px;">Quantity</th>
             <th class="px-5 py-2 text-center">Total Price</th>
             <th class="px-5 py-2 text-center"></th>
         </tr>
